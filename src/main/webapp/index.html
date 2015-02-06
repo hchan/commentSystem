@@ -1,74 +1,46 @@
 <!doctype html>
-<html lang="en" data-framework="angularjs">
+<html lang="en" data-framework="angularjs" ng-app="commentapp">
 	<head>
 		<meta charset="utf-8">
-		<title>AngularJS & RequireJS • TodoMVC</title>
-		<link rel="stylesheet" href="bower_components/todomvc-common/base.css">
+		<title>AngularJS • TodoMVC</title>
+		
 		<style>[ng-cloak] { display: none; }</style>
-		<script>
-			// Include angular-loader to allow modules to be loaded in any order.
-			/*
-			   AngularJS v1.0.2
-			   (c) 2010-2012 Google, Inc. http://angularjs.org
-			   License: MIT
-			 */
-			(function(i){'use strict';function d(c,b,e){return c[b]||(c[b]=e())}return d(d(i,"angular",Object),"module",function(){var c={};return function(b,e,f){e&&c.hasOwnProperty(b)&&(c[b]=null);return d(c,b,function(){function a(a,b,d){return function(){c[d||"push"]([a,b,arguments]);return g}}if(!e)throw Error("No module: "+b);var c=[],d=[],h=a("$injector","invoke"),g={_invokeQueue:c,_runBlocks:d,requires:e,name:b,provider:a("$provide","provider"),factory:a("$provide","factory"),service:a("$provide","service"), value:a("$provide","value"),constant:a("$provide","constant","unshift"),filter:a("$filterProvider","register"),controller:a("$controllerProvider","register"),directive:a("$compileProvider","directive"),config:h,run:function(a){d.push(a);return this}};f&&h(f);return g})}})})(window);
-		</script>
 	</head>
-	<body>
-		<section id="todoapp" ng-controller="TodoController">
-			<header id="header">
-				<h1>todos</h1>
-				<form id="todo-form" ng-submit="addTodo()">
-					<input id="new-todo" placeholder="What needs to be done?" ng-model="newTodo" autofocus>
-				</form>
-			</header>
-			<section id="main" ng-show="todos.length" ng-cloak>
-				<input id="toggle-all" type="checkbox" ng-model="allChecked" ng-click="markAll(allChecked)">
-				<label for="toggle-all">Mark all as complete</label>
-				<ul id="todo-list">
-					<li ng-repeat="todo in todos | filter:statusFilter track by $index" ng-class="{completed: todo.completed, editing: todo == editedTodo}">
-						<div class="view">
-							<input class="toggle" type="checkbox" ng-model="todo.completed">
-							<label ng-dblclick="editTodo(todo)">{{todo.title}}</label>
-							<button class="destroy" ng-click="removeTodo(todo)"></button>
-						</div>
-						<form ng-submit="doneEditing(todo)">
-							<input class="edit" ng-trim="false" ng-model="todo.title" ng-blur="doneEditing(todo)" todo-focus="todo == editedTodo">
-						</form>
-					</li>
-				</ul>
-			</section>
-			<footer id="footer" ng-show="todos.length" ng-cloak>
-				<span id="todo-count"><strong>{{remainingCount}}</strong>
-					<ng-pluralize count="remainingCount" when="{ one: 'item left', other: 'items left' }"></ng-pluralize>
-				</span>
-				<ul id="filters">
-					<li>
-						<a ng-class="{selected: location.path() == '/'} " href="#/">All</a>
-					</li>
-					<li>
-						<a ng-class="{selected: location.path() == '/active'}" href="#/active">Active</a>
-					</li>
-					<li>
-						<a ng-class="{selected: location.path() == '/completed'}" href="#/completed">Completed</a>
-					</li>
-				</ul>
-				<button id="clear-completed" ng-click="clearDoneTodos()" ng-show="remainingCount < todos.length">Clear completed ({{todos.length - remainingCount}})</button>
-			</footer>
-		</section>
-		<footer id="info">
-			<p>Double-click to edit a todo</p>
-			<p>Credits:
-				<a href="http://twitter.com/cburgdorf">Christoph Burgdorf</a>,
-				<a href="http://ericbidelman.com">Eric Bidelman</a>,
-				<a href="http://jacobmumm.com">Jacob Mumm</a>,
-				<a href="http://igorminar.com">Igor Minar</a> and
-				<a href="http://twitter.com/passy">Pascal Hartig</a>
-			</p>
-			<p>Part of <a href="http://todomvc.com">TodoMVC</a></p>
-		</footer>
+	<body ng-controller="CommentCtrl">
+		<h1>Comment System</h1>
+		This is Comment System powered by Spring MVC and AngularJS by Henry Chan
+		<br/>
+		<a href = "https://github.com/hchan/commentSystem">Git Location</a>
+		<hr/>
+<div id="newCommentForm" style="border:1px solid black;">
+
+Create a new comment...<br/>
+Comment Text: <input type="text" ng-model ="comment.text"><br/>
+User First Name: <input type="text" ng-model ="comment.user.firstName"><br/>
+User Last Name: <input type="text" ng-model ="comment.user.lastName"><br/>
+User Profile: <input type="text" ng-model ="comment.user.profile"><br/>
+<input type="button" id="create" value="Create" ng-click="create()"/>
+</div>
+<br/><br/>
+Number of comments {{comments.length}}
+<div>
+<ul class="commentContainer">
+    <li class="animate-repeat" ng-repeat="comment in comments">
+      {{comment.text}} created on {{comment.createdDate | date:'yyyy-MM-dd HH:mm:ss Z'}} by {{comment.user.firstName}}
+    </li>
+    <li class="animate-repeat" ng-if="results.length == 0">
+      <strong>No results found...</strong>
+    </li>
+  </ul>
+</div>  
+		</script>
 		<script src="bower_components/todomvc-common/base.js"></script>
-		<script data-main="js/main" src="bower_components/requirejs/require.js"></script>
+		<script src="bower_components/angular/angular.js"></script>
+		<script src="bower_components/angular-route/angular-route.js"></script>
+<!-- 		<script src="js/app.js"></script> -->
+		<script src="js/controllers/commentCtrl.js"></script>
+<!-- 		<script src="js/services/todoStorage.js"></script> -->
+<!-- 		<script src="js/directives/todoFocus.js"></script> -->
+<!-- 		<script src="js/directives/todoEscape.js"></script> -->
 	</body>
 </html>

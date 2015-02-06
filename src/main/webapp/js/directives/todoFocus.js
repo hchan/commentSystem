@@ -1,18 +1,20 @@
-/*global define*/
-'use strict';
+/*global angular */
+
 /**
- * Directive that places focus on the element it is applied to when the expression it binds to evaluates to true.
+ * Directive that places focus on the element it is applied to when the
+ * expression it binds to evaluates to true
  */
-define(['app'], function (app) {
-	app.directive('todoFocus', ['$timeout', function ($timeout) {
+angular.module('todomvc')
+	.directive('todoFocus', function todoFocus($timeout) {
+		'use strict';
+
 		return function (scope, elem, attrs) {
-			scope.$watch(attrs.todoFocus, function (newval) {
-				if (newval) {
+			scope.$watch(attrs.todoFocus, function (newVal) {
+				if (newVal) {
 					$timeout(function () {
 						elem[0].focus();
 					}, 0, false);
 				}
 			});
 		};
-	}]);
-});
+	});
