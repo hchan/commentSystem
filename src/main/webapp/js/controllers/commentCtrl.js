@@ -12,7 +12,7 @@ angular.module('commentapp', [])
 					});
 		
 		$scope.create = function() {
-			console.log("do a create!!");
+			console.log("do a create!!!!");
 			console.log($scope.comment);
 		}
 		
