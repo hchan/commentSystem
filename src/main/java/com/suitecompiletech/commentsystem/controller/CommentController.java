@@ -23,6 +23,7 @@ public class CommentController {
 		this.comments = comments;
 	}
 
+	
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
 	public ArrayList<Comment> findAll() {	
