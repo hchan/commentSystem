@@ -22,7 +22,12 @@ commentapp
 		}
 		
 		$scope.create = function() {
+			if ($scope.comment.text == null || $scope.comment.user == null || $scope.comment.user.firstName == null || $scope.comment.user.lastName == null) {
+				alert("Validation Error");
+				return;
+			}
 			console.log("About to create :" + $scope.comment);
+			
 			$http.post(serviceURL, $scope.comment)
 			.success(function(data, status, headers, config) {
 				// after you insert, fetch all
