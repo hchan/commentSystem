@@ -15,12 +15,23 @@
 		<br/>
 		<a href = "https://github.com/hchan/commentSystem">Git Location</a>
 		<hr/>
+		
+		<style type="text/css">
+  .css-form input.ng-invalid.ng-touched {
+    background-color: #FA787E;
+  }
+
+  .css-form input.ng-valid.ng-touched {
+    background-color: #78FA89;
+  }
+</style>
+		
 <div id="newCommentForm" style="border:1px solid black;">
 
 Create a new comment...<br/>
-Comment Text: <input type="text" ng-model ="comment.text"><br/>
-User First Name: <input type="text" ng-model ="comment.user.firstName"><br/>
-User Last Name: <input type="text" ng-model ="comment.user.lastName"><br/>
+Comment Text: <input type="text" ng-model ="comment.text" required><br/>
+User First Name: <input type="text" ng-model ="comment.user.firstName" required><br/>
+User Last Name: <input type="text" ng-model ="comment.user.lastName" required><br/>
 User Profile: <input type="text" ng-model ="comment.user.profile"><br/>
 <input type="button" id="create" value="Create" ng-click="create()"/>
 </div>
