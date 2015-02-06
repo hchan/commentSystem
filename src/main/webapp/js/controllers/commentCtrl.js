@@ -3,14 +3,16 @@ commentapp
 		'use strict';
 		$scope.comment = {};
 		
-		$scope.showProfile = function() {
+		$scope.showProfile = function(comment) {
+			console.log(comment)
 			  ModalService.showModal({
 		
 			    templateUrl: "showProfile.html",
-			    controller: "ProfileCtrl"
+			    controller: "ProfileCtrl",
+			    inputs : {
+			    	"comment" : comment
+			    }
 			  }).then(function(modal) {
-console.log(modal);
-console.log(modal.element);
 			    //it's a bootstrap element, use 'modal' to show it
 			    modal.element.modal();
 			    modal.close.then(function(result) {
