@@ -1,20 +1,42 @@
-
-angular.module('commentapp', [])
+commentapp
 	.controller('CommentCtrl', function TodoCtrl($scope, $http) {
 		'use strict';
 		$scope.comment = {};
 		
-		$http.get('/api/comment')
-					.success(function(data, status, headers, config) {
-						console.log(data)
-						$scope.comments = data;
-						
-					});
+		
 		
 		$scope.create = function() {
-			console.log("do a create!!!!");
-			console.log($scope.comment);
+			console.log("About to create :" + $scope.comment);
+			$http.post(serviceURL, $scope.comment)
+			.success(function(data, status, headers, config) {
+				// after you insert, fetch all
+				$scope.getAll();
+				
+			});
 		}
+		
+		$scope.getAll = function() {
+			$http.get(serviceURL)
+			.success(function(data, status, headers, config) {
+				console.log(data)
+				$scope.comments = data;
+				
+			});
+		}
+		
+		$scope.parseCommentText = function(comment) {
+			if (comment.text.length < 20) {
+				console.log("Read more...");
+				comment.showFullText = true;
+			} else {
+				comment.shortText = comment.text.substring(0,20) + "...";
+			}
+		}
+		
+		$scope.showFullText = function (comment) {
+			comment.showFullText = true;
+		}
+		$scope.getAll(); // fetch everything
 		
 		//console.log(comments);
 

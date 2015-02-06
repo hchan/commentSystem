@@ -26,7 +26,12 @@ Number of comments {{comments.length}}
 <div>
 <ul class="commentContainer">
     <li class="animate-repeat" ng-repeat="comment in comments">
-      {{comment.text}} created on {{comment.createdDate | date:'yyyy-MM-dd HH:mm:ss Z'}} by {{comment.user.firstName}}
+  
+      {{parseCommentText(comment)}} 
+      
+      <span ng-if="comment.showFullText">{{comment.text}}</span>
+       <span ng-if="!comment.showFullText">{{comment.shortText}} <a href="#" ng-click="showFullText(comment)">Read More</a></span>
+      created on {{comment.createdDate | date:'yyyy-MM-dd HH:mm:ss Z'}} by {{comment.user.firstName}}
     </li>
     <li class="animate-repeat" ng-if="results.length == 0">
       <strong>No results found...</strong>
@@ -34,13 +39,9 @@ Number of comments {{comments.length}}
   </ul>
 </div>  
 		</script>
-		<script src="bower_components/todomvc-common/base.js"></script>
 		<script src="bower_components/angular/angular.js"></script>
-		<script src="bower_components/angular-route/angular-route.js"></script>
-<!-- 		<script src="js/app.js"></script> -->
+		<script src="js/app.js"></script>
 		<script src="js/controllers/commentCtrl.js"></script>
-<!-- 		<script src="js/services/todoStorage.js"></script> -->
-<!-- 		<script src="js/directives/todoFocus.js"></script> -->
-<!-- 		<script src="js/directives/todoEscape.js"></script> -->
+		<script src="js/filters/commentFilter.js"></script>
 	</body>
 </html>

@@ -22,7 +22,7 @@ public class CommentController {
 		user.setFirstName("Henry");
 		user.setLastName("Chan");
 		user.setProfile("Level 90 Warrior");
-		comment.setText("LFG - I can tank");
+		comment.setText("LFG - I can tank.  Finished ICC in Heroic and Realm First with Sindarossa");
 		comment.setUser(user);
 		comments.add(comment);
 		
@@ -31,7 +31,7 @@ public class CommentController {
 		user.setFirstName("Malfurion");
 		user.setLastName("Stormrage");
 		user.setProfile("Level 90 Druid");
-		comment.setText("Henry's - what is your iLvl?");
+		comment.setText("Henry's - iLvl?");
 		comment.setUser(user);
 		comments.add(comment);
 	}
