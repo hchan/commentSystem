@@ -1,9 +1,23 @@
 commentapp
-	.controller('CommentCtrl', function TodoCtrl($scope, $http) {
+	.controller('CommentCtrl', function TodoCtrl($scope, $http, ModalService) {
 		'use strict';
 		$scope.comment = {};
 		
+		$scope.showProfile = function() {
+			  ModalService.showModal({
 		
+			    templateUrl: "showProfile.html",
+			    controller: "ProfileCtrl"
+			  }).then(function(modal) {
+console.log(modal);
+console.log(modal.element);
+			    //it's a bootstrap element, use 'modal' to show it
+			    modal.element.modal();
+			    modal.close.then(function(result) {
+			      console.log(result);
+			    });
+			  });
+		}
 		
 		$scope.create = function() {
 			console.log("About to create :" + $scope.comment);
@@ -18,7 +32,6 @@ commentapp
 		$scope.getAll = function() {
 			$http.get(serviceURL)
 			.success(function(data, status, headers, config) {
-				console.log(data)
 				$scope.comments = data;
 				
 			});
@@ -26,7 +39,6 @@ commentapp
 		
 		$scope.parseCommentText = function(comment) {
 			if (comment.text.length < 20) {
-				console.log("Read more...");
 				comment.showFullText = true;
 			} else {
 				comment.shortText = comment.text.substring(0,20) + "...";

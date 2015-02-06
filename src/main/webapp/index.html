@@ -1,12 +1,15 @@
 <!doctype html>
 <html lang="en" data-framework="angularjs" ng-app="commentapp">
 	<head>
+		 <script src="bower_components/jquery/dist/jquery.min.js"></script>
+		 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+		 <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 		<meta charset="utf-8">
-		<title>AngularJS • TodoMVC</title>
+		<title>Comment System</title>
 		
 		<style>[ng-cloak] { display: none; }</style>
 	</head>
-	<body ng-controller="CommentCtrl">
+	<body ng-controller="CommentCtrl" style="padding: 10px">
 		<h1>Comment System</h1>
 		This is Comment System powered by Spring MVC and AngularJS by Henry Chan
 		<br/>
@@ -31,7 +34,8 @@ Number of comments {{comments.length}}
       
       <span ng-if="comment.showFullText">{{comment.text}}</span>
        <span ng-if="!comment.showFullText">{{comment.shortText}} <a href="#" ng-click="showFullText(comment)">Read More</a></span>
-      created on {{comment.createdDate | date:'yyyy-MM-dd HH:mm:ss Z'}} by {{comment.user.firstName}}
+      created on {{comment.createdDate | date:'yyyy-MM-dd HH:mm:ss Z'}} by 
+      <a href="#" ng-click="showProfile(comment)">{{comment.user.firstName}}</a>
     </li>
     <li class="animate-repeat" ng-if="results.length == 0">
       <strong>No results found...</strong>
@@ -40,8 +44,10 @@ Number of comments {{comments.length}}
 </div>  
 		</script>
 		<script src="bower_components/angular/angular.js"></script>
+		<script src="bower_components/angular-modal-service/dst/angular-modal-service.min.js"></script>  
 		<script src="js/app.js"></script>
 		<script src="js/controllers/commentCtrl.js"></script>
+		<script src="js/controllers/profileCtrl.js"></script>
 		<script src="js/filters/commentFilter.js"></script>
 	</body>
 </html>
