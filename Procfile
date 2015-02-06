@@ -1,1 +1,2 @@
-web: java $JAVA_OPTS -DTG_ENV=prod -jar jetty-runner.jar --port $PORT build/libs/*.war
+web:    java -cp target/classes:target/dependency/* Main
+
